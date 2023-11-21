@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+sales_data = [120, 150, 170, 180, 200, 210, 220, 230, 240, 250, 260, 280]
+
+# Line plot
+plt.figure(figsize=(10, 4))
+plt.plot(months, sales_data, marker='o')
+plt.xlabel('Month')
+plt.ylabel('Sales')
+plt.title('Monthly Sales Data (Line Plot)')
+plt.grid(True)
+plt.show()
+
+# Bar plot
+plt.figure(figsize=(10, 4))
+plt.bar(months, sales_data, color='skyblue')
+plt.xlabel('Month')
+plt.ylabel('Sales')
+plt.title('Monthly Sales Data (Bar Plot)')
+plt.grid(axis='y')
+plt.show()
