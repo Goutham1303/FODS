@@ -1,0 +1,8 @@
+import numpy as np
+time_intervals = np.array([0, 1, 2, 3, 4, 5])
+vertical_positions = np.array([0, 10, 20, 30, 40, 50])
+delta_positions = np.diff(vertical_positions)
+delta_time = np.diff(time_intervals)
+velocities = delta_positions / delta_time
+average_velocity = np.mean(velocities)
+print("Average velocity of the projectile: ", average_velocity)
