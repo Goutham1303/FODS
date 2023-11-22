@@ -1,0 +1,41 @@
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+customer_ids = [1, 1, 2, 2, 3, 3]
+total_spent = [100, 200, 150, 250, 300, 350]
+items_purchased = [5, 10, 7, 14, 15, 30]
+
+# Convert the lists to numpy arrays
+customer_ids = np.array(customer_ids)
+total_spent = np.array(total_spent)
+items_purchased = np.array(items_purchased)
+
+# Group the data by customer ID and calculate the total amount spent and total items purchased by each customer
+unique_customer_ids, indices = np.unique(customer_ids, return_inverse=True)
+total_spent_per_customer = np.bincount(indices, weights=total_spent)
+items_purchased_per_customer = np.bincount(indices, weights=items_purchased)
+
+# Normalize the data
+mean_spent = np.mean(total_spent_per_customer)
+std_spent = np.std(total_spent_per_customer)
+mean_items = np.mean(items_purchased_per_customer)
+std_items = np.std(items_purchased_per_customer)
+
+total_spent_normalized = (total_spent_per_customer - mean_spent) / std_spent
+items_purchased_normalized = (items_purchased_per_customer - mean_items) / std_items
+
+# Combine the normalized data into a 2D array
+data = np.vstack((total_spent_normalized, items_purchased_normalized)).T
+
+# Fit the K-Means model
+kmeans = KMeans(n_clusters=3, random_state=0).fit(data)
+
+# Add the cluster labels to the customer data
+clusters = kmeans.labels_
+
+# Plot the data
+plt.scatter(total_spent_per_customer, items_purchased_per_customer, c=clusters)
+plt.title('Customer Segments')
+plt.xlabel('Total Spent')
+plt.ylabel('Items Purchased')
+plt.show()
