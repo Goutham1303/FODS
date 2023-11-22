@@ -1,0 +1,16 @@
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+data = {
+    'CustomerID': [1, 2, 3, 4, 5],
+    'TotalSpent': [100, 200, 300, 400, 500],
+    'Frequency': [5, 10, 15, 20, 25]
+}
+df = pd.DataFrame(data)
+scaler = StandardScaler()
+df_scaled = scaler.fit_transform(df[['TotalSpent', 'Frequency']])
+kmeans = KMeans(n_clusters=3, random_state=0)
+kmeans.fit(df_scaled)
+clusters = kmeans.labels_
+df['Cluster'] = clusters
+print(df)
