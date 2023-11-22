@@ -1,0 +1,16 @@
+import numpy as np
+city1_temps = [20, 21, 19, 20, 22, 21, 19]
+city2_temps = [25, 26, 27, 26, 25, 26, 27]
+city3_temps = [30, 31, 32, 31, 30, 31, 32]
+city1_temps = np.array(city1_temps)
+city2_temps = np.array(city2_temps)
+city3_temps = np.array(city3_temps)
+mean_temps = [np.mean(city1_temps), np.mean(city2_temps), np.mean(city3_temps)]
+std_devs = [np.std(city1_temps), np.std(city2_temps), np.std(city3_temps)]
+temperature_ranges = [np.ptp(city1_temps), np.ptp(city2_temps), np.ptp(city3_temps)]
+city_with_highest_range = np.argmax(temperature_ranges)
+city_with_most_consistent_temp = np.argmin(std_devs)
+print(f'Mean temperatures: {mean_temps}\n')
+print(f'Standard deviations: {std_devs}\n')
+print(f'City with the highest temperature range: {city_with_highest_range}\n')
+print(f'City with the most consistent temperature: {city_with_most_consistent_temp}\n')
