@@ -1,0 +1,24 @@
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+import pandas as pd
+import numpy as np
+data = {
+    'EngineSize': [1.6, 2.0, 2.2, 1.8, 2.5],
+    'Horsepower': [120, 150, 180, 140, 200],
+    'FuelEfficiency': [30, 28, 25, 32, 22],
+    'Price': [20000, 25000, 30000, 22000, 32000]
+}
+df = pd.DataFrame(data)
+print(df.corr())
+X = df[['EngineSize', 'Horsepower', 'FuelEfficiency']]
+y = df['Price']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+y_pred = regressor.predict(X_test)
+print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))
+print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
+print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+coeff_df = pd.DataFrame(regressor.coef_, X.columns, columns=['Coefficient'])
+print(coeff_df)
