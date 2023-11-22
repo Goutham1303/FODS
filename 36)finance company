@@ -1,0 +1,12 @@
+import numpy as np
+close_prices_list = [120.34, 121.56, 119.76, 122.45, 123.87, 122.34, 124.56]
+close_prices = np.array(close_prices_list)
+print(close_prices)
+std_dev = np.std(close_prices)
+print(f'The standard deviation of the closing prices is {std_dev}')
+mean = np.mean(close_prices)
+print(f'The mean closing price is {mean}')
+max_close_index = np.argmax(close_prices)
+min_close_index = np.argmin(close_prices)
+print(f'The highest closing price was {close_prices[max_close_index]} at index {max_close_index}')
+print(f'The lowest closing price was {close_prices[min_close_index]} at index {min_close_index}')
